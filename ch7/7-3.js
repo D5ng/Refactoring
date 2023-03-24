@@ -1,0 +1,47 @@
+export class Order {
+  #priority
+  constructor(priority) {
+    this.#priority = priority;
+  }
+
+  isHighPriority(){
+    return this.#priority.higherThan(new Priority('normal'));
+  }
+}
+
+class Priority {
+  #value
+  constructor(value){
+    if (Priority.legalValue().includes(value)) {
+      this.#value = value;
+    } else {
+      throw new Error(`${value} 값이 유효하지 않습니다.`);
+    }
+  }
+
+  static legalValue(){
+    return ['low', 'normal', 'high', 'rush']
+  }
+
+  get index(){
+    return Priority.legalValue().indexOf(this.#value)
+  }
+
+  equals(other){
+    return this.index === other.index;
+  }
+
+  higherThan(other){
+   return this.index > other.index 
+  }
+}
+
+const orders = [
+  new Order(new Priority("normal")),
+  new Order(new Priority("high" )),
+  new Order(new Priority("rush" )),
+];
+
+const highPriorityCount = orders.filter((o) => o.isHighPriority()).length;
+
+console.log(highPriorityCount);
