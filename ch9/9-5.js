@@ -50,5 +50,3 @@ const order1 = new Order(1, customerRepository.registerCustomer("Dongs"))
 const order2 = new Order(2, customerRepository.registerCustomer("Suzy"));
 const order3 = new Order(2, customerRepository.registerCustomer("Ina"));
 const order4 = new Order(2, customerRepository.registerCustomer("MinJung"));
-
-console.log(customerRepository.customers);
