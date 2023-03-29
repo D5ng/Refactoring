@@ -1,5 +1,5 @@
 function disabilityAmount(employee) {
-  if (isNotEligibleForDesability(employee)) {
+  if (isNotEligibleForDesability(employee)){
     return 0;
   }
   return 1;
