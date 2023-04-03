@@ -5,7 +5,6 @@ export function payAmount(employee) {
   return someFinalComputation();
 }
 
-
 function someFinalComputation() {
   return { amount: 999, reasonCode: "UNICORN" };
 }
