@@ -21,10 +21,6 @@ export class Customer {
     //
   }
 
-  set billingPlan(arg) {
-    //
-  }
-
   get paymentHistory() {
     //
   }
