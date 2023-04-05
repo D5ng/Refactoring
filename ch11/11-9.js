@@ -3,30 +3,46 @@ export function score(candidate, medicalExam, scoringGuide) {
 }
 
 class Scorer {
+  #candidate;
+  #medicalExam;
+  #scoringGuide;
+  #result;
+  #healthLevel;
+  #highMedicalRiskFlag;
+  #certificationGrade;
   constructor(candidate, medicalExam, scoringGuide) {
-    this.candidate = candidate;
-    this.medicalExam = medicalExam;
-    this.scoringGuide = scoringGuide;
+    this.#candidate = candidate;
+    this.#medicalExam = medicalExam;
+    this.#scoringGuide = scoringGuide;
   }
 
-  execute(){
-    let result = 0;
-    let healthLevel = 0;
-    let highMedicalRiskFlag = false;
+  execute() {
+    this.#result = 0;
+    this.#healthLevel = 0;
 
-    if (this.medicalExam.isSmoker) {
-      healthLevel += 10;
-      highMedicalRiskFlag = true;
-    }
-    let certificationGrade = "regular";
-    if (this.scoringGuide.stateWithLowCertification(this.candidate.originState)) {
-      certificationGrade = "low";
-      result -= 5;
-    }
+    this.#highMedicalRiskFlag = false;
+    this.scoreSmorking();
+    
+    this.#certificationGrade = "regular";
+    this.isLowCertification();
     // lots more code like this
-    result -= Math.max(healthLevel - 5, 0);
-    return result;
+    this.#result -= Math.max(this.#healthLevel - 5, 0);
+    return this.#result;
   }
+
+  scoreSmorking() {
+    if (this.#medicalExam.isSmoker) {
+      this.#healthLevel += 10;
+      this.#highMedicalRiskFlag = true;
+    }
+  }
+
+  isLowCertification(){
+    if (this.#scoringGuide.stateWithLowCertification(this.#candidate.originState)) {
+      this.#certificationGrade = "low";
+      this.#result -= 5;
+    }
+  };
 }
 
 export class ScoringGuide {
