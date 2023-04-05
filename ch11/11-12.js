@@ -17,6 +17,6 @@ try {
   const result = localShippingRules();
 } catch(error){
   if(error instanceof OrderProcessingError){
-    console.log("OrderProcessingError 에러입니다.");
+    console.log("OrderProcessingError 에러입니다.", error);
   }
 }
