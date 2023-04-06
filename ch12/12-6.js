@@ -1,15 +1,13 @@
 class Employee {
   #name;
-  constructor(name) {
+  #type;
+  constructor(name, type) {
     this.#name = name;
-  }
-
-  get name() {
-    return this.#name;
+    this.#type = type;
   }
 
   get type() {
-    return "Employee";
+    return this.#type;
   }
 
   toString() {
@@ -22,7 +20,9 @@ class Employee {
         return new Engineer(name);
       case "Manager":
         return new Manager(name);
-      default:
+      case "Personnel":
+        return new Personnel(name);
+      default: 
         throw new Error(`${type}라는 직원 유형은 없습니다.`);
     }
   }
@@ -40,8 +40,16 @@ class Manager extends Employee {
   }
 }
 
-const ellie = new Engineer("엘리");
-const bob = new Manager("밥");
+class Personnel extends Employee {
+  get type() {
+    return "Personnel";
+  }
+}
 
-const dongs = Employee.createEmployee('dongs', 'Engineer');
-console.log(dongs.name);
+const DongHyun = new Engineer("DongHyun");
+const bob = new Manager("밥");
+const Dongs = Employee.createEmployee("Dongs", "Personnel");
+
+console.log(DongHyun.type)
+console.log(bob.type);
+console.log(Dongs.type);
